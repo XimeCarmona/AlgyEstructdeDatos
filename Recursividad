@@ -1,0 +1,35 @@
+#punto5
+romanos = {'i': 1, 'v': 5, 'x': 10, 'l': 50, 'c':100, 'd':500, 'm':1000}
+
+numero1 = 'xxvii'
+numero2 = 'mxl'
+
+def convert_rom_a_dec(num_romano):
+    if len(num_romano) == 1:
+        return romanos[num_romano]
+    else:
+        if romanos[num_romano[0]] >= romanos[num_romano[1]]:
+            return romanos[num_romano[0]] + convert_rom_a_dec(num_romano[1:])
+        else:
+            return - romanos[num_romano[0]] + convert_rom_a_dec(num_romano[1:])
+
+print(convert_rom_a_dec(numero1))
+print(convert_rom_a_dec(numero2))
+
+#punto22
+def usar_la_fuerza(mochila, obj_sacados=0):
+    if not mochila:  # caso base: la mochila está vacía
+        print("No se encontró ningun 'sable de luz' entre los objetos de la mochila.")
+        return 0
+    elif mochila[0] == "sable de luz":  # caso base: se encontró un sable de luz
+        print(f"Se encontró un 'sable de luz', fue el objeto nro: {obj_sacados + 1}.")
+        return obj_sacados + 1
+    else:  # caso recursivo: se saca un objeto y se llama a la función nuevamente
+        print(f"-Sacando objeto {mochila[0]} dentro de la mochila-")
+        return usar_la_fuerza(mochila[1:], obj_sacados + 1)
+
+mochila1 = ["linterna", "comida", "ropa", "sable de luz", "botiquín"]
+usar_la_fuerza(mochila1)
+print()
+mochila2 = ["linterna","comida","ropa","botiquin", "amuleto", "pocion"]
+usar_la_fuerza(mochila2)

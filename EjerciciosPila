@@ -1,0 +1,73 @@
+from pila import Pila, pila_vacia, desapilar, apilar, tamanio
+from random import randint, choice
+
+#def cargarPila(pila):
+#    while(tamanio(pila) < 5):
+#        elemento = (input('Ingrese un elemento para añadir a la pila: '))
+#        apilar(pila, elemento)
+
+#lista = Pila()
+#cargarPila(lista)
+
+#punto19
+
+pila_peliculas = Pila()
+pila_marvel = Pila()
+pila_2014 = Pila()
+cont_2018 = 0
+titulo = input('titulo: ')
+while titulo != '':
+    estreno = int(input('año: '))
+    estudio = input('estudio cinematografico: ')
+    apilar(pila_peliculas,[titulo, estreno, estudio])
+    titulo = input('titulo: ')
+while not pila_vacia(pila_peliculas):
+    dato = desapilar(pila_peliculas)
+    if str(dato[1]) == '2014':
+        apilar(pila_2014,dato)
+    elif str(dato[1]) == '2018':
+        cont_2018 += 1
+    elif str(dato[1]) == '2016' and dato[2] == 'Marvel Studios':
+        apilar(pila_marvel,dato)
+    
+print('cantidad de peliculas estrenadas en 2018: ', cont_2018)
+print('peliculas estrenadas en 2014: ')
+while not pila_vacia(pila_2014):
+    x = desapilar(pila_2014)
+    print(x[0])
+print('peliculas estrenadas en 2016 por Marvel Studios: ')
+while not pila_vacia(pila_marvel):
+    x = desapilar(pila_marvel) 
+    print(x[0])
+
+
+#punto24
+
+personajes = Pila()
+personajes = ['Groot' , 'Magneto' , 'Iron Man' , 'Rocket Raccoon' , 'Sam' ,'Black Widow' , 'Bruce Banner']
+lista = Pila()
+while (tamanio(lista)) < 7:
+    dato[0] = choice(personajes)
+    dato[1] = randint(1,10)
+    apilar(lista,dato)
+
+def personajes_marvel(lista):
+    i = 1
+    while (not (pila_vacia(lista))):
+        personaje = desapilar(lista)
+        # A
+        if (personaje[0] == 'Rocket Raccoon' or personaje[0] == 'Groot'):
+            print(personaje[0], 'esta en la posición', i+1)
+        # B
+        if (personaje[1] > 5):
+            print(personaje[0], 'participo en', personaje[1], 'películas')
+        # C
+        if (personaje[0] == 'Black Widow'):
+            print(personaje[0], 'participo en', personaje[1], 'peliculas')
+        # D
+        if (personaje[0][0] in ['C','D','G']):
+            print ('el personaje', personaje[0], 'comienza con C, D o G')
+        i += 1
+    return
+print(personajes_marvel(lista))
+
